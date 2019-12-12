@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+       Nested Dynamic Form
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="height: 100vh;">
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Cognome</ion-label>
+      <ion-input formControlName="surname" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">E-Mail</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Numero indirizzi</ion-label>
+      <ion-select formControlName="addressSize">
+        <ion-select-option *ngFor="let selection of selections">{{ selection }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <form style="margin-top: 30px;" *ngFor="let address of form.controls['addresses'].controls; let i = index" [formGroup]="address">
+      <h3 class="ion-padding">Indirizzo {{ i + 1 }}</h3>
+      <ion-item>
+        <ion-label position="floating">Indirizzo</ion-label>
+        <ion-input formControlName="street" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Numbero</ion-label>
+        <ion-input formControlName="number" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Città</ion-label>
+        <ion-input formControlName="city" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Provincia</ion-label>
+        <ion-input formControlName="province" type="text"></ion-input>
+      </ion-item>
+    </form>
+  </form>
+
+  <pre class="ion-margin">form value: {{ form.value | json }}</pre>
+
+
+  <button>
+    <i>i</i>button
+  </button>
+</ion-content>
